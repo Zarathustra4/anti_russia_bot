@@ -15,15 +15,19 @@ async def main():
     print(username)
     print(me.phone)
 
-    entity = await client.get_entity('+380990893264')
-    channel = await client.get_entity('https://t.me/pro_pagandaua')
-    #await client(JoinChannelRequest(entity))
+    chanel_of_chats = await client.get_entity('https://t.me/chat_of_channels')
 
-    for i in range(9, 10):
-        await client.forward_messages(entity, i, channel)    
+    victim = await client.get_entity('+380 67 830 53 24')
+    #channel = await client.get_entity('https://t.me/pro_pagandaua')
+    #await client(JoinChannelRequest(victim))
+
+    i = 2
+    while True:
+        await client.forward_messages(victim, i, chanel_of_chats)    
+        await client.send_message(victim, str(i))
         #time.sleep(0)
+        i += 1
 
-    
 
     #await client(LeaveChannelRequest(entity))
     
