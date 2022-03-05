@@ -61,6 +61,7 @@ async def main():
                             await client.
                             #print("chat with user: "+ str(user.username) + " deleted")
                             #print(dialog.entity)
+                            
                             break
 
 
