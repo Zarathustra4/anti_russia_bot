@@ -20,6 +20,12 @@ async def attack(user, propaganda):
                     msg_c = 0
     
     #archive part
+    dialogs = client.iter_dialogs()
+    async for dialog in dialogs:
+            if user.id == dialog.entity.id:
+                await client.edit_folder(dialog, 1)
+                print("chat with user: "+ str(user.username) + " deleted")
+                break
         
 
 async def create_list_of_links(messages_with_links):

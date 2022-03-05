@@ -17,6 +17,6 @@ if not os.path.exists("anti_putin.session"):
     #api_hash = input()
 print("U alredy have an session")
 
-client = TelegramClient('anti_putin', api_id, api_hash)
+client = TelegramClient('max', api_id, api_hash)
 
 

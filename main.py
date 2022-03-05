@@ -54,14 +54,7 @@ async def main():
         async for user in users:
                 if user.id == me.id:
                         continue
-                #await attack(user, propaganda)
-                dialogs = client.iter_dialogs()
-                async for dialog in dialogs:
-                        if user.id == dialog.entity.id:
-                            await client.
-                            #print("chat with user: "+ str(user.username) + " deleted")
-                            #print(dialog.entity)
-                            break
+                await attack(user, propaganda)
 
 
 with client:
