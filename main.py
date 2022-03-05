@@ -1,5 +1,6 @@
 from telethon.tl.functions.channels import JoinChannelRequest
 from telethon.tl.functions.channels import LeaveChannelRequest
+from telethon import functions
 from registration import *
 from functions import *
 from const import *
