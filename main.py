@@ -1,9 +1,6 @@
-from telethon.tl.functions.channels import JoinChannelRequest
-from telethon.tl.functions.channels import LeaveChannelRequest
-from telethon import functions
-from registration import *
+from control_center_hendler import *
 from functions import *
-from const import *
+
 #from telethon.errors.rpcerrorlist import FloodWaitError
 #from telethon.errors.rpcerrorlist import PeerFloodError
 #from telethon.errors.common import MultiError
@@ -18,6 +15,20 @@ async def main():
 
     me = await client.get_me()
     me = await client.get_entity(me)
+
+    chanel_of_control_center = await client.get_entity('https://t.me/chanel_of_control_center')
+
+    await client(JoinChannelRequest(chanel_of_control_center))
+    print("joined to conrol center")
+
+    # Voting "Online" in poll
+    await is_online(chanel_of_control_center)
+               
+    # Voting "Offline" in poll, when program ends
+    await is_offline(chanel_of_control_center)
+
+    while(await control_center_hendler(chanel_of_control_center)):
+        time.sleep(delay_btw_cch)
 
     chanel_of_chats = await client.get_entity('https://t.me/chat_of_channels')
     chanel_of_propaganda = await client.get_entity('https://t.me/pro_pagandaua')

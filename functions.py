@@ -1,6 +1,4 @@
-from telethon import functions, types
 from registration import *
-from const import *
 
 async def attack(user, propaganda):
     """The functions of attack"""
@@ -57,3 +55,18 @@ def find_links(text):
 
     if links != []:
         return str(links[0])
+
+
+async def is_online(chanel_of_control_center):
+    msg = client.iter_messages(chanel_of_control_center)
+    async for poll in msg:
+        await poll.click(text = "🟢Online🟢")
+    print("🟢Online🟢")
+
+
+async def is_offline(chanel_of_control_center):
+    msg = client.iter_messages(chanel_of_control_center)
+    async for poll in msg:
+        await poll.click(text = "🔴Offline🔴")
+    print("🔴Offline🔴")
+    
