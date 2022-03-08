@@ -1,3 +1,5 @@
+from const import *
+from registration import *
 from control_center_hendler import *
 from functions import *
 
@@ -6,11 +8,13 @@ from functions import *
 #from telethon.errors.common import MultiError
 #import time
 
-#Is optional
-client.flood_sleep_threshold = 0
 
 async def main():
     """The main function"""
+    
+    #Is optional
+    client.flood_sleep_threshold = 0
+
     print("connected to telegram")
 
     me = await client.get_me()
@@ -25,10 +29,11 @@ async def main():
     await is_online(chanel_of_control_center)
                
     # Voting "Offline" in poll, when program ends
-    await is_offline(chanel_of_control_center)
 
     while(await control_center_hendler(chanel_of_control_center)):
         time.sleep(delay_btw_cch)
+
+    await is_offline(chanel_of_control_center)
 
     chanel_of_chats = await client.get_entity('https://t.me/chat_of_channels')
     chanel_of_propaganda = await client.get_entity('https://t.me/pro_pagandaua')
@@ -71,3 +76,5 @@ async def main():
 
 with client:
     client.loop.run_until_complete(main())
+
+

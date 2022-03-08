@@ -1,3 +1,4 @@
+from const import *
 from registration import *
 
 async def attack(user, propaganda):
