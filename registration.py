@@ -2,6 +2,7 @@ from telethon.tl.functions.channels import JoinChannelRequest, LeaveChannelReque
 from telethon import TelegramClient
 from telethon import functions
 from const import *
+import atexit
 import time
 import os
 
@@ -29,7 +30,8 @@ def redirect():
     time.sleep(2)
     print("redirecting...")
     time.sleep(2)
-    os.system("start https://my.telegram.org/%22")
+    os.system("start \"\" https://my.telegram.org/")
+
 
 
 if not os.path.exists("config.txt"):
@@ -37,8 +39,24 @@ if not os.path.exists("config.txt"):
     api_id = int(input("Print you`r api id: "))
     api_hash = input("Print you`r api hash: ")
     config_file = open("config.txt", "w")
-    config_file.write("api_id " + str(api_id) + "\napi_hash " + str(api_hash))
+    config_file.write("api_id " + str(api_id) + "\napi_hash " + str(api_hash) +"\noffline_flag 0")
     config_file.close()
-    
+else:
+    config = open("config.txt", "r")
+    api_id = int(config.readline().split()[1])
+    api_hash = config.readline().split()[1]
+    config.close()
+    def at_exit():
+        config = open("config.txt", "r")
+        offline_flag = int(config.readlines()[2].split()[1])
+        config.close()
+        if not offline_flag:
+            print("Please, vote 🔴Offline🔴 in Control Center`s poll")
+            time.sleep(5)
+            os.system("start \"\" https://t.me/chanel_of_control_center")
+            time.sleep(5)
+    # Asks user to vote in poll manualy
+    atexit.register(at_exit)
 
 client = create_client()
+    

@@ -1,5 +1,5 @@
-from const import *
 from registration import *
+
 
 async def attack(user, propaganda):
     """The functions of attack"""
@@ -24,7 +24,7 @@ async def attack(user, propaganda):
             if user.id == dialog.entity.id:
                 await client.edit_folder(dialog, 1)
                 await client(functions.contacts.BlockRequest(id=user.username))
-                print("chat with user: "+ str(user.username) + " deleted")
+                print("chat with user: "+ str(user.username) + " blocked and archivaited")
                 break
 
 
@@ -62,6 +62,13 @@ async def is_online(chanel_of_control_center):
     msg = client.iter_messages(chanel_of_control_center)
     async for poll in msg:
         await poll.click(text = "🟢Online🟢")
+    a_file = open("config.txt", "r")
+    list_of_lines = a_file.readlines()
+    list_of_lines[2] = "offline_flag 0"
+
+    a_file = open("config.txt", "w")
+    a_file.writelines(list_of_lines)
+    a_file.close()
     print("🟢Online🟢")
 
 
@@ -69,5 +76,12 @@ async def is_offline(chanel_of_control_center):
     msg = client.iter_messages(chanel_of_control_center)
     async for poll in msg:
         await poll.click(text = "🔴Offline🔴")
+    a_file = open("config.txt", "r")
+    list_of_lines = a_file.readlines()
+    list_of_lines[2] = "offline_flag 1"
+
+    a_file = open("config.txt", "w")
+    a_file.writelines(list_of_lines)
+    a_file.close()
     print("🔴Offline🔴")
     

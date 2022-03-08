@@ -11,4 +11,4 @@ msg_per_buffer = 10
 #delays in seconds
 delay_btw_buffers = 3
 delay_btw_msg = 0.5
-delay_btw_cch = 60
+delay_btw_cch = 30

@@ -27,13 +27,9 @@ async def main():
 
     # Voting "Online" in poll
     await is_online(chanel_of_control_center)
-               
-    # Voting "Offline" in poll, when program ends
 
     while(await control_center_hendler(chanel_of_control_center)):
         time.sleep(delay_btw_cch)
-
-    await is_offline(chanel_of_control_center)
 
     chanel_of_chats = await client.get_entity('https://t.me/chat_of_channels')
     chanel_of_propaganda = await client.get_entity('https://t.me/pro_pagandaua')
@@ -60,11 +56,9 @@ async def main():
         print("joined chat")
 
         #trying to cahs everything
-    
         users = client.iter_participants(victim, aggressive = True)
         print("copied user info")
         
-
         await client(LeaveChannelRequest(victim))
         print("leaved chat")
 
@@ -72,9 +66,12 @@ async def main():
                 if user.id == me.id:
                         continue
                 await attack(user, propaganda)
-
-
+    # Voting "Offline" in poll            
+    await is_offline(chanel_of_control_center)
+#try:
 with client:
     client.loop.run_until_complete(main())
-
+#except Exception:
+    #print("Somthing wrong")
+    
 
