@@ -69,7 +69,7 @@ async def is_online(chanel_of_control_center):
     a_file = open("config.txt", "w")
     a_file.writelines(list_of_lines)
     a_file.close()
-    print("🟢Online🟢")
+    print("Online")
 
 
 async def is_offline(chanel_of_control_center):
@@ -83,5 +83,5 @@ async def is_offline(chanel_of_control_center):
     a_file = open("config.txt", "w")
     a_file.writelines(list_of_lines)
     a_file.close()
-    print("🔴Offline🔴")
+    print("Offline")
     

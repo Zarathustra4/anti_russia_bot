@@ -25,9 +25,6 @@ async def main():
     await client(JoinChannelRequest(chanel_of_control_center))
     print("joined to conrol center")
 
-    # Voting "Online" in poll
-    await is_online(chanel_of_control_center)
-
     while(await control_center_hendler(chanel_of_control_center)):
         time.sleep(delay_btw_cch)
 
@@ -46,10 +43,14 @@ async def main():
     messages_with_links = client.iter_messages(chanel_of_chats)
     print("copied link messages")
     
-    links = await create_list_of_links(messages_with_links)
+    links = await create_list_of_links(messages_with_links) #["https://t.me/test_gg_wp"]
     print("created list of links")
     
+    # Voting "Online" in poll
+    await is_online(chanel_of_control_center)
+
     for link in links:
+         
         victim = await client.get_entity(link)
 
         await client(JoinChannelRequest(victim))
@@ -66,6 +67,7 @@ async def main():
                 if user.id == me.id:
                         continue
                 await attack(user, propaganda)
+                time.sleep(delay_btw_attack)
     # Voting "Offline" in poll            
     await is_offline(chanel_of_control_center)
 #try:
@@ -73,5 +75,4 @@ with client:
     client.loop.run_until_complete(main())
 #except Exception:
     #print("Somthing wrong")
-    
 

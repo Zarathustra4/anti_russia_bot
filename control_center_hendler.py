@@ -6,6 +6,7 @@ def find_comand(mess,command):
     return False
 
 async def control_center_hendler(chanel_of_control_center):
+    print("Waiting for the start of attack")
     messages = client.iter_messages(chanel_of_control_center)
 
     async for msg in messages:

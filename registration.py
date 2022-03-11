@@ -51,10 +51,11 @@ else:
         offline_flag = int(config.readlines()[2].split()[1])
         config.close()
         if not offline_flag:
-            print("Please, vote 🔴Offline🔴 in Control Center`s poll")
+            print("Please, vote Offline in Control Center`s poll")
             time.sleep(5)
             os.system("start \"\" https://t.me/chanel_of_control_center")
-            time.sleep(5)
+            time.sleep(10)
+            input("Program ends...")
     # Asks user to vote in poll manualy
     atexit.register(at_exit)
 
