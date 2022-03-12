@@ -2,6 +2,7 @@ from telethon.tl.functions.channels import JoinChannelRequest, LeaveChannelReque
 from telethon.sync import TelegramClient
 from telethon import functions, types
 from telethon import TelegramClient
+from telethon.errors import *
 from const import *
 import atexit
 import time
