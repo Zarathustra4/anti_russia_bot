@@ -1,31 +1,13 @@
 from registration import *
 
 
-async def attack(user, propaganda):
-    """The functions of attack"""
-    
-    #attack part
-    msg_c = 0
-    print("attack user: " + str(user.username))
-    async for msg in propaganda:
-        if str(type(msg)) == "<class 'telethon.tl.patched.Message'>":
-                await client.forward_messages(user, msg)
-                print("message sent")
-                time.sleep(delay_btw_msg)
-                msg_c+=1
-                if msg_c == msg_per_buffer:
-                    print("delay...")
-                    time.sleep(delay_btw_buffers)
-                    msg_c = 0
-    
-    #archive part
-    dialogs = client.iter_dialogs()
-    async for dialog in dialogs:
-            if user.id == dialog.entity.id:
-                await client.edit_folder(dialog, 1)
-                await client(functions.contacts.BlockRequest(id=user.username))
-                print("chat with user: "+ str(user.username) + " blocked and archivaited")
-                break
+async def attack(user):
+        await client(functions.account.ReportPeerRequest(
+            peer = user,
+            reason = types.InputReportReasonFake(), 
+            message = "Fake info about war in Ukraine"
+        ))
+        
 
 
 async def create_list_of_links(messages_with_links):
@@ -84,4 +66,5 @@ async def is_offline(chanel_of_control_center):
     a_file.writelines(list_of_lines)
     a_file.close()
     print("Offline")
+    input("Program ends...")
     

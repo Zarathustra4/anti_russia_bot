@@ -29,16 +29,9 @@ async def main():
         time.sleep(delay_btw_cch)
 
     chanel_of_chats = await client.get_entity('https://t.me/chat_of_channels')
-    chanel_of_propaganda = await client.get_entity('https://t.me/pro_pagandaua')
 
     await client(JoinChannelRequest(chanel_of_chats))
     print("joined chat of links")
-
-    await client(JoinChannelRequest(chanel_of_propaganda))
-    print("joined chat of propaganda")
-
-    propaganda = client.iter_messages(chanel_of_propaganda)
-    print("copied propaganda messages")
 
     messages_with_links = client.iter_messages(chanel_of_chats)
     print("copied link messages")
@@ -53,21 +46,22 @@ async def main():
          
         victim = await client.get_entity(link)
 
+        print("reporting " + victim.title)
+
         await client(JoinChannelRequest(victim))
         print("joined chat")
 
-        #trying to cahs everything
-        users = client.iter_participants(victim, aggressive = True)
-        print("copied user info")
+        time.sleep(delay_btw_buffers)
+
+        await attack(victim)
+        print("report sended")
+
+        time.sleep(delay_btw_buffers)
         
         await client(LeaveChannelRequest(victim))
         print("leaved chat")
-
-        async for user in users:
-                if user.id == me.id:
-                        continue
-                await attack(user, propaganda)
-                time.sleep(delay_btw_attack)
+   
+        time.sleep(delay_btw_attack)
     # Voting "Offline" in poll            
     await is_offline(chanel_of_control_center)
 #try:
